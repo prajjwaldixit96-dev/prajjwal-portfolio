@@ -73,6 +73,91 @@
     @media (prefers-reduced-motion: reduce) {
       .marquee-track { animation: none; }
     }
+
+    /* ===== MOBILE FIXES ===== */
+    /* Fix experience list items text wrapping */
+    .exp-list-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: #A7B0C4;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+    .exp-list-item .icon-wrap {
+      flex-shrink: 0;
+      margin-top: 4px;
+      color: #A855F7;
+    }
+    .exp-list-item .item-text {
+      flex: 1;
+      min-width: 0;
+    }
+    .exp-list-item .item-text .highlight {
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    /* Skills grid mobile: 2x2 */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    @media (min-width: 1024px) {
+      .skills-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+      }
+    }
+
+    /* Skill card mobile padding reduced */
+    .skill-card {
+      padding: 16px;
+    }
+    @media (min-width: 768px) {
+      .skill-card {
+        padding: 32px;
+      }
+    }
+
+    /* Skill card icon mobile size */
+    .skill-icon {
+      width: 28px;
+      height: 28px;
+      margin-bottom: 12px;
+    }
+    @media (min-width: 768px) {
+      .skill-icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 24px;
+      }
+    }
+
+    /* Skill card heading mobile */
+    .skill-heading {
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+    }
+    @media (min-width: 768px) {
+      .skill-heading {
+        font-size: 1.25rem;
+        margin-bottom: 16px;
+      }
+    }
+
+    /* Skill list items mobile */
+    .skill-list li {
+      font-size: 0.78rem;
+      margin-bottom: 4px;
+    }
+    @media (min-width: 768px) {
+      .skill-list li {
+        font-size: 0.875rem;
+        margin-bottom: 8px;
+      }
+    }
   </style>
 </head>
 <body class="loading text-white">
@@ -109,6 +194,7 @@
       <a href="#contact" class="mobile-nav-link btn btn-primary justify-center w-full mt-4 magnetic">Let's Talk</a>
     </div>
   </nav>
+
   <section class="relative min-h-screen flex items-center pt-20 overflow-hidden" id="hero">
     <div class="relative z-10 w-full max-w-7xl mx-auto px-6">
       <div class="max-w-4xl">
@@ -128,9 +214,11 @@
       </div>
     </div>
   </section>
+
   <section class="py-10 border-y border-white/5 bg-[#0C0C0C]/50 backdrop-blur-sm">
     <div class="marquee-container"><div class="marquee-track" id="marquee-track"></div></div>
   </section>
+
   <section id="about" class="py-20 md:py-32 relative bg-transparent">
     <div class="max-w-7xl mx-auto px-6">
       <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -155,20 +243,58 @@
       </div>
     </div>
   </section>
+
+  <!-- SKILLS SECTION — Fixed 2x2 grid on mobile -->
   <section id="skills" class="py-20 md:py-32 border-y border-white/5 relative bg-[#0C0C0C]/40 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-12 md:mb-20 reveal-up">
         <h2 class="font-display font-black text-4xl md:text-5xl uppercase metal-text mb-4">Core Skills</h2>
         <p class="text-textMuted max-w-2xl mx-auto">Mastery across the modern full-stack spectrum.</p>
       </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="glass-card p-8 reveal-up tilt"><i data-lucide="layout" class="w-10 h-10 text-accentCyan mb-6"></i><h3 class="font-bold text-xl mb-4 font-display">Frontend</h3><ul class="space-y-2 text-textMuted font-light"><li>HTML5 / CSS3</li><li>JavaScript (ES6+)</li><li>Bootstrap 5</li><li>Tailwind CSS</li></ul></div>
-        <div class="glass-card p-8 reveal-up tilt" style="transition-delay:0.1s"><i data-lucide="server" class="w-10 h-10 text-accentMint mb-6"></i><h3 class="font-bold text-xl mb-4 font-display">Backend</h3><ul class="space-y-2 text-textMuted font-light"><li>Python</li><li>Django</li><li>REST APIs</li><li>Java</li></ul></div>
-        <div class="glass-card p-8 reveal-up tilt" style="transition-delay:0.2s"><i data-lucide="database" class="w-10 h-10 text-accentRose mb-6"></i><h3 class="font-bold text-xl mb-4 font-display">Database</h3><ul class="space-y-2 text-textMuted font-light"><li>MySQL</li><li>SQLite</li></ul></div>
-        <div class="glass-card p-8 reveal-up tilt" style="transition-delay:0.3s"><i data-lucide="cpu" class="w-10 h-10 text-accentCyan mb-6"></i><h3 class="font-bold text-xl mb-4 font-display">Tools & AI</h3><ul class="space-y-2 text-textMuted font-light"><li>Git & GitHub</li><li>VS Code</li><li>Groq API</li><li>LLM Integration</li></ul></div>
+      <!-- 2 cols on mobile, 4 cols on desktop -->
+      <div class="skills-grid">
+        <div class="glass-card skill-card reveal-up tilt">
+          <i data-lucide="layout" class="skill-icon text-accentCyan"></i>
+          <h3 class="font-bold skill-heading font-display">Frontend</h3>
+          <ul class="skill-list space-y-1 text-textMuted font-light">
+            <li>HTML5 / CSS3</li>
+            <li>JavaScript (ES6+)</li>
+            <li>Bootstrap 5</li>
+            <li>Tailwind CSS</li>
+          </ul>
+        </div>
+        <div class="glass-card skill-card reveal-up tilt" style="transition-delay:0.1s">
+          <i data-lucide="server" class="skill-icon text-accentMint"></i>
+          <h3 class="font-bold skill-heading font-display">Backend</h3>
+          <ul class="skill-list space-y-1 text-textMuted font-light">
+            <li>Python</li>
+            <li>Django</li>
+            <li>REST APIs</li>
+            <li>Java</li>
+          </ul>
+        </div>
+        <div class="glass-card skill-card reveal-up tilt" style="transition-delay:0.2s">
+          <i data-lucide="database" class="skill-icon text-accentRose"></i>
+          <h3 class="font-bold skill-heading font-display">Database</h3>
+          <ul class="skill-list space-y-1 text-textMuted font-light">
+            <li>MySQL</li>
+            <li>SQLite</li>
+          </ul>
+        </div>
+        <div class="glass-card skill-card reveal-up tilt" style="transition-delay:0.3s">
+          <i data-lucide="cpu" class="skill-icon text-accentCyan"></i>
+          <h3 class="font-bold skill-heading font-display">Tools & AI</h3>
+          <ul class="skill-list space-y-1 text-textMuted font-light">
+            <li>Git & GitHub</li>
+            <li>VS Code</li>
+            <li>Groq API</li>
+            <li>LLM Integration</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
+
   <section id="services" class="py-20 md:py-32 relative bg-transparent">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-12 md:mb-20 reveal-up">
@@ -184,7 +310,7 @@
     </div>
   </section>
 
-  <!-- EXPERIENCE SECTION -->
+  <!-- EXPERIENCE SECTION — Fixed mobile text wrapping -->
   <section id="experience" class="py-20 md:py-32 border-y border-white/5 relative bg-[#0C0C0C]/40 backdrop-blur-md">
     <div class="max-w-4xl mx-auto px-6">
       <div class="text-center mb-12 md:mb-20 reveal-up">
@@ -207,13 +333,31 @@
           </div>
         </div>
         <div class="w-full h-px bg-white/5 mb-6"></div>
+
+        <!-- FIXED: Each li now wraps text properly on mobile -->
         <ul class="space-y-4">
-          <li class="flex gap-3 text-textMuted font-light leading-relaxed"><span class="text-accentCyan mt-1 flex-shrink-0"><i data-lucide="chevron-right" class="w-4 h-4"></i></span>Undergoing 90-day Industrial Training in Web Development using <span class="text-white font-medium mx-1">Python & Django</span></li>
-          <li class="flex gap-3 text-textMuted font-light leading-relaxed"><span class="text-accentCyan mt-1 flex-shrink-0"><i data-lucide="chevron-right" class="w-4 h-4"></i></span>Working on both <span class="text-white font-medium mx-1">frontend and backend</span> development tasks in a professional environment</li>
-          <li class="flex gap-3 text-textMuted font-light leading-relaxed"><span class="text-accentCyan mt-1 flex-shrink-0"><i data-lucide="chevron-right" class="w-4 h-4"></i></span>Implementing <span class="text-white font-medium mx-1">CRUD operations, authentication, and database integration</span> on real projects</li>
-          <li class="flex gap-3 text-textMuted font-light leading-relaxed"><span class="text-accentCyan mt-1 flex-shrink-0"><i data-lucide="chevron-right" class="w-4 h-4"></i></span>Gaining hands-on experience in <span class="text-white font-medium mx-1">real-world project development</span> and deployment workflows</li>
-          <li class="flex gap-3 text-textMuted font-light leading-relaxed"><span class="text-accentCyan mt-1 flex-shrink-0"><i data-lucide="chevron-right" class="w-4 h-4"></i></span>Following <span class="text-white font-medium mx-1">industry coding practices</span> and structured development workflows</li>
+          <li class="exp-list-item">
+            <span class="icon-wrap"><i data-lucide="chevron-right" class="w-4 h-4"></i></span>
+            <span class="item-text">Undergoing 90-day Industrial Training in Web Development using <span class="highlight">Python & Django</span></span>
+          </li>
+          <li class="exp-list-item">
+            <span class="icon-wrap"><i data-lucide="chevron-right" class="w-4 h-4"></i></span>
+            <span class="item-text">Working on both <span class="highlight">frontend and backend</span> development tasks in a professional environment</span>
+          </li>
+          <li class="exp-list-item">
+            <span class="icon-wrap"><i data-lucide="chevron-right" class="w-4 h-4"></i></span>
+            <span class="item-text">Implementing <span class="highlight">CRUD operations, authentication, and database integration</span> on real projects</span>
+          </li>
+          <li class="exp-list-item">
+            <span class="icon-wrap"><i data-lucide="chevron-right" class="w-4 h-4"></i></span>
+            <span class="item-text">Gaining hands-on experience in <span class="highlight">real-world project development</span> and deployment workflows</span>
+          </li>
+          <li class="exp-list-item">
+            <span class="icon-wrap"><i data-lucide="chevron-right" class="w-4 h-4"></i></span>
+            <span class="item-text">Following <span class="highlight">industry coding practices</span> and structured development workflows</span>
+          </li>
         </ul>
+
         <div class="flex flex-wrap gap-2 mt-8">
           <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-textMuted border border-white/10">Python</span>
           <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-textMuted border border-white/10">Django</span>
@@ -486,7 +630,6 @@
         }});
       });
 
-      // ✅ FIXED: Sirf scale down hoga, opacity poori rahegi - overlap readable
       const projects = gsap.utils.toArray('.project-card');
       projects.forEach((proj, i) => {
         if (i < projects.length - 1) {
