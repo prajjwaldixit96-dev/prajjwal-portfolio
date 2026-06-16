@@ -1,0 +1,33 @@
+<svg width="1200" height="820" viewBox="0 0 1200 820" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="820" rx="36" fill="#090B0D"/>
+  <rect x="58" y="58" width="1084" height="704" rx="30" fill="#11161A" stroke="url(#stroke)" stroke-width="2"/>
+  <rect x="104" y="124" width="988" height="116" rx="24" fill="#171F25"/>
+  <rect x="104" y="286" width="292" height="402" rx="24" fill="#0D1419" stroke="#263D46"/>
+  <rect x="434" y="286" width="658" height="402" rx="24" fill="#0D1419" stroke="#263D46"/>
+  <text x="142" y="192" fill="#F5EFFF" font-family="Sora, Arial" font-size="46" font-weight="800">Finance Dashboard</text>
+  <text x="144" y="356" fill="#A7B0C4" font-family="Sora, Arial" font-size="24">Monthly spend</text>
+  <text x="144" y="432" fill="#F5EFFF" font-family="Space Grotesk, Arial" font-size="76" font-weight="800">$4,280</text>
+  <circle cx="250" cy="570" r="92" fill="none" stroke="#1E3038" stroke-width="30"/>
+  <path d="M250 478A92 92 0 1 1 171 618" stroke="#A855F7" stroke-width="30" stroke-linecap="round"/>
+  <path d="M250 478A92 92 0 0 1 338 544" stroke="#C084FC" stroke-width="30" stroke-linecap="round"/>
+  <path d="M500 618L598 512L694 558L782 426L884 482L1030 358" stroke="#C084FC" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M500 618L598 512L694 558L782 426L884 482L1030 358V642H500V618Z" fill="url(#area)" opacity=".58"/>
+  <g stroke="#243B44">
+    <path d="M500 360H1032"/>
+    <path d="M500 450H1032"/>
+    <path d="M500 540H1032"/>
+    <path d="M500 630H1032"/>
+  </g>
+  <rect x="808" y="154" width="184" height="56" rx="18" fill="#E9D5FF"/>
+  <defs>
+    <linearGradient id="stroke" x1="58" y1="58" x2="1142" y2="762" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A855F7"/>
+      <stop offset=".58" stop-color="#FFFFFF" stop-opacity=".12"/>
+      <stop offset="1" stop-color="#C084FC"/>
+    </linearGradient>
+    <linearGradient id="area" x1="500" y1="358" x2="731" y2="748" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#A855F7" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg>

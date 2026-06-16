@@ -1,0 +1,31 @@
+<svg width="1200" height="820" viewBox="0 0 1200 820" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="820" rx="36" fill="#080B10"/>
+  <rect x="60" y="64" width="1080" height="692" rx="30" fill="#0F151C" stroke="url(#stroke)" stroke-width="2"/>
+  <rect x="112" y="128" width="372" height="564" rx="28" fill="#121D25" stroke="#2B4652"/>
+  <rect x="552" y="128" width="496" height="564" rx="28" fill="#0A1117" stroke="#203844"/>
+  <circle cx="298" cy="282" r="106" fill="url(#brain)"/>
+  <path d="M254 280C224 250 232 198 280 192C297 153 363 165 369 210C413 218 429 274 394 305C410 354 354 388 318 354C285 386 231 356 254 280Z" stroke="#F5EFFF" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M288 232V350M338 220V364M244 286H404" stroke="#061216" stroke-width="10" stroke-linecap="round"/>
+  <text x="154" y="514" fill="#F3FCFF" font-family="Sora, Arial" font-size="38" font-weight="800">AI Assistant</text>
+  <text x="154" y="562" fill="#93A7B2" font-family="Sora, Arial" font-size="22">Automation workflow</text>
+  <rect x="608" y="188" width="332" height="64" rx="18" fill="#182632"/>
+  <rect x="608" y="290" width="390" height="64" rx="18" fill="#11202A" stroke="#254958"/>
+  <rect x="608" y="392" width="278" height="64" rx="18" fill="#182632"/>
+  <rect x="608" y="494" width="356" height="64" rx="18" fill="#11202A" stroke="#254958"/>
+  <path d="M652 220H860M652 322H952M652 424H820M652 526H918" stroke="#C084FC" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="1000" cy="210" r="28" fill="#A855F7"/>
+  <circle cx="924" cy="636" r="46" fill="#7C3AED" fill-opacity=".75"/>
+  <defs>
+    <linearGradient id="stroke" x1="60" y1="64" x2="1140" y2="756" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C084FC"/>
+      <stop offset=".5" stop-color="#FFFFFF" stop-opacity=".14"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+    <radialGradient id="brain" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(260 224) rotate(51) scale(185)">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset=".24" stop-color="#C084FC"/>
+      <stop offset=".78" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#1C2731"/>
+    </radialGradient>
+  </defs>
+</svg>

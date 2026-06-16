@@ -1,0 +1,572 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  {% csrf_token %}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Prajjwal is a Full Stack Developer and AI Enthusiast building scalable web applications, AI-powered solutions, and immersive digital experiences." />
+  <meta name="theme-color" content="#0C0C0C" />
+  <title>Prajjwal Dixit | Full Stack Developer & AI Enthusiast</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Space Grotesk', 'Sora', 'sans-serif'],
+            body: ['Sora', 'Poppins', 'sans-serif'],
+          },
+          colors: {
+            brandBg: '#0C0C0C',
+            accentCyan: '#A855F7',
+            accentMint: '#C084FC',
+            accentRose: '#7C3AED',
+            textMuted: '#A7B0C4',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    :root { --bg: #0C0C0C; --glass-bg: rgba(255,255,255,0.03); --glass-border: rgba(255,255,255,0.08); --glow: rgba(168,85,247,0.5); }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: auto; }
+    body { margin: 0; min-height: 100vh; overflow-x: hidden; background-color: var(--bg); color: #f7f9ff; font-family: 'Sora','Poppins',sans-serif; }
+    body.loading { overflow: hidden; }
+    ::selection { background: var(--glow); color: #fff; }
+    .cursor-dot,.cursor-ring { pointer-events: none; position: fixed; left: 0; top: 0; z-index: 9999; transform: translate(-50%,-50%); display: none; }
+    .cursor-dot { width: 8px; height: 8px; background: #fff; border-radius: 50%; box-shadow: 0 0 15px var(--glow); }
+    .cursor-ring { width: 40px; height: 40px; border: 1px solid rgba(168,85,247,0.6); border-radius: 50%; transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease; }
+    @media (hover: hover) and (pointer: fine) {
+      body { cursor: none; }
+      a,button,input,textarea { cursor: none; }
+      .cursor-dot,.cursor-ring { display: block; }
+      .cursor-ring.hovering { width: 60px; height: 60px; border-color: rgba(192,132,252,0.9); background: rgba(168,85,247,0.1); }
+    }
+    .loader { position: fixed; inset: 0; z-index: 9998; display: grid; place-items: center; background: var(--bg); }
+    .loader-progress { width: 200px; height: 2px; background: rgba(255,255,255,0.1); margin-top: 20px; overflow: hidden; }
+    .loader-bar { width: 0%; height: 100%; background: linear-gradient(90deg,#A855F7,#C084FC,#7C3AED); }
+    .metal-text { background: linear-gradient(115deg,#fff 0%,#e9d5ff 20%,#c084fc 40%,#a855f7 60%,#f6f8ff 80%,#7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .glass-card { background: var(--glass-bg); border: 1px solid var(--glass-border); backdrop-filter: blur(12px); border-radius: 16px; transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
+    .glass-card:hover { border-color: rgba(168,85,247,0.4); box-shadow: 0 10px 40px rgba(168,85,247,0.1); transform: translateY(-5px); }
+    .btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-family: 'Space Grotesk',sans-serif; text-transform: uppercase; letter-spacing: 1px; overflow: hidden; transition: all 0.3s ease; }
+    .btn-primary { background: linear-gradient(135deg,#A855F7,#7C3AED); color: #fff; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 0 20px rgba(124,58,237,0.4); }
+    .btn-primary:hover { box-shadow: 0 0 30px rgba(168,85,247,0.6); }
+    .btn-ghost { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; backdrop-filter: blur(5px); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: rgba(168,85,247,0.5); }
+    .marquee-container { display: flex; overflow: hidden; mask-image: linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent); }
+    .marquee-track { display: flex; min-width: max-content; animation: scrollLeft 30s linear infinite; }
+    @keyframes scrollLeft { to { transform: translateX(-50%); } }
+    .tech-pill { display: flex; align-items: center; gap: 10px; padding: 12px 24px; margin: 0 10px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 99px; font-weight: 600; white-space: nowrap; }
+    .tech-pill img { width: 24px; height: 24px; object-fit: contain; }
+    .projects-wrapper { position: relative; }
+    .project-card { position: sticky; top: 120px; transform-origin: top center; }
+    .timeline-line { position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom,#A855F7,rgba(255,255,255,0.1)); }
+    .timeline-dot { position: absolute; left: -5px; width: 12px; height: 12px; border-radius: 50%; background: #A855F7; box-shadow: 0 0 10px #A855F7; }
+    canvas#bg-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+    section,nav,footer { position: relative; z-index: 10; }
+  </style>
+</head>
+<body class="loading text-white">
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+  <div class="loader">
+    <div class="text-center">
+      <h1 class="font-display font-black text-4xl metal-text tracking-widest uppercase mb-4" id="loader-logo">Prajjwal</h1>
+      <div class="font-display text-textMuted tracking-[0.3em] text-sm" id="loader-count">0%</div>
+      <div class="loader-progress rounded-full"><div class="loader-bar rounded-full" id="loader-bar"></div></div>
+    </div>
+  </div>
+  <canvas id="bg-canvas"></canvas>
+  <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-300 backdrop-blur-md bg-[#0C0C0C]/70 border-b border-white/5 py-4">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <a href="#" class="magnetic font-display font-black text-2xl tracking-widest uppercase metal-text">Prajjwal</a>
+      <div class="hidden md:flex items-center gap-8 font-medium text-sm text-textMuted uppercase tracking-wider">
+        <a href="#about" class="hover:text-white transition-colors magnetic">About</a>
+        <a href="#skills" class="hover:text-white transition-colors magnetic">Skills</a>
+        <a href="#experience" class="hover:text-white transition-colors magnetic">Experience</a>
+        <a href="#projects" class="hover:text-white transition-colors magnetic">Projects</a>
+      </div>
+      <a href="#contact" class="hidden md:inline-flex btn btn-ghost !py-2 !px-5 !text-xs magnetic">Let's Talk</a>
+    </div>
+  </nav>
+  <section class="relative min-h-screen flex items-center pt-20 overflow-hidden" id="hero">
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-6">
+      <div class="max-w-4xl">
+        <p class="hero-kicker text-accentMint font-bold uppercase tracking-[0.2em] text-sm mb-6 flex items-center gap-4 opacity-0 transform translate-y-4">
+          <span class="w-10 h-[2px] bg-accentMint"></span> Full Stack Developer & AI Enthusiast
+        </p>
+        <h1 class="hero-title font-display font-black text-[clamp(3rem,8vw,6rem)] leading-[1.1] tracking-tight mb-6 opacity-0">
+          <span class="metal-text uppercase block">Prajjwal Dixit</span>
+        </h1>
+        <p class="hero-subtitle text-textMuted text-lg md:text-xl font-light max-w-2xl leading-relaxed mb-10 opacity-0 transform translate-y-4">
+          I build scalable web applications, AI-powered solutions, and immersive digital experiences that combine creativity, innovation, and performance.
+        </p>
+        <div class="flex flex-wrap gap-4 opacity-0 transform translate-y-4" id="hero-btns">
+          <a href="#projects" class="btn btn-primary magnetic">View Projects <i data-lucide="arrow-right" class="w-5 h-5"></i></a>
+          <a href="#contact" class="btn btn-ghost magnetic">Contact Me</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="py-10 border-y border-white/5 bg-[#0C0C0C]/50 backdrop-blur-sm">
+    <div class="marquee-container"><div class="marquee-track" id="marquee-track"></div></div>
+  </section>
+  <section id="about" class="py-32 relative bg-transparent">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="reveal-up">
+          <h2 class="font-display font-black text-4xl md:text-5xl uppercase metal-text mb-6">About Me</h2>
+          <p class="text-textMuted text-lg leading-relaxed mb-6 font-light">I am Prajjwal, a passionate Full Stack Developer dedicated to building modern, scalable, and user-centric digital solutions. I enjoy transforming innovative ideas into real-world applications while continuously exploring emerging technologies and AI-driven solutions.</p>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="glass-card p-8 text-center reveal-up magnetic tilt">
+            <h3 class="font-display font-black text-5xl metal-text mb-2 counter" data-target="25">0</h3>
+            <p class="text-sm font-semibold uppercase tracking-widest text-textMuted">Projects<br/>Completed</p>
+          </div>
+          <div class="glass-card p-8 text-center reveal-up magnetic tilt" style="transition-delay:0.1s">
+            <h3 class="font-display font-black text-5xl metal-text mb-2 counter" data-target="15">0</h3>
+            <p class="text-sm font-semibold uppercase tracking-widest text-textMuted">Technologies<br/>Mastered</p>
+          </div>
+          <div class="glass-card p-8 text-center reveal-up magnetic tilt lg:col-span-2" style="transition-delay:0.2s">
+            <h3 class="font-display font-black text-5xl metal-text mb-2 counter" data-target="2500">0</h3>
+            <p class="text-sm font-semibold uppercase tracking-widest text-textMuted">Coding Hours</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="skills" class="py-32 border-y border-white/5 relative bg-[#0C0C0C]/40 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-20 reveal-up">
+        <h2 class="font-display font-black text-4xl md:text-5xl uppercase metal-text mb-4">Core Skills</h2>
+        <p class="text-textMuted max-w-2xl mx-auto">Mastery across the modern full-stack spectrum.</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="glass-card p-8 reveal-up tilt"><i data-lucide="layout" class="w-10 h-10 text-accentCyan mb-6"></i><h3 class="font-bold text-xl mb-4 font-display">Frontend</h3><ul class="space-y-2 text-textMuted font-light"><li>HTML5 / CSS3</li><li>JavaScript (ES6+)</li><li>Bootstrap 5</li><li>Tailwind CSS</li></ul></div>
+        <div class="glass-card p-8 reveal-up tilt" style="transition-delay:0.1s"><i data-lucide="server" class="w-10 h-10 text-accentMint mb-6"></i><h3 class="font-bold text-xl mb-4 font-display">Backend</h3><ul class="space-y-2 text-textMuted font-light"><li>Python</li><li>Django</li><li>REST APIs</li><li>Java</li></ul></div>
+        <div class="glass-card p-8 reveal-up tilt" style="transition-delay:0.2s"><i data-lucide="database" class="w-10 h-10 text-accentRose mb-6"></i><h3 class="font-bold text-xl mb-4 font-display">Database</h3><ul class="space-y-2 text-textMuted font-light"><li>MySQL</li><li>SQLite</li></ul></div>
+        <div class="glass-card p-8 reveal-up tilt" style="transition-delay:0.3s"><i data-lucide="cpu" class="w-10 h-10 text-accentCyan mb-6"></i><h3 class="font-bold text-xl mb-4 font-display">Tools & AI</h3><ul class="space-y-2 text-textMuted font-light"><li>Git & GitHub</li><li>VS Code</li><li>Groq API</li><li>LLM Integration</li></ul></div>
+      </div>
+    </div>
+  </section>
+  <section id="services" class="py-32 relative bg-transparent">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-20 reveal-up">
+        <h2 class="font-display font-black text-4xl md:text-5xl uppercase metal-text mb-4">Services</h2>
+        <p class="text-textMuted max-w-2xl mx-auto">Premium digital solutions tailored for your business.</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="glass-card p-8 flex gap-6 reveal-up magnetic tilt"><div class="bg-white/5 p-4 rounded-xl h-fit border border-white/10"><i data-lucide="globe" class="w-8 h-8 text-accentMint"></i></div><div><h3 class="font-bold text-2xl mb-3 font-display">Web Development</h3><p class="text-textMuted font-light leading-relaxed">Building modern, responsive, and blazing-fast websites with striking animations and aesthetics.</p></div></div>
+        <div class="glass-card p-8 flex gap-6 reveal-up magnetic tilt" style="transition-delay:0.1s"><div class="bg-white/5 p-4 rounded-xl h-fit border border-white/10"><i data-lucide="layers" class="w-8 h-8 text-accentCyan"></i></div><div><h3 class="font-bold text-2xl mb-3 font-display">Full Stack Development</h3><p class="text-textMuted font-light leading-relaxed">Complete end-to-end solutions, connecting beautiful interfaces with robust, scalable backends.</p></div></div>
+        <div class="glass-card p-8 flex gap-6 reveal-up magnetic tilt" style="transition-delay:0.2s"><div class="bg-white/5 p-4 rounded-xl h-fit border border-white/10"><i data-lucide="bot" class="w-8 h-8 text-accentRose"></i></div><div><h3 class="font-bold text-2xl mb-3 font-display">AI Integration</h3><p class="text-textMuted font-light leading-relaxed">Integrating smart AI-powered assistants, automation, and data processing into web applications.</p></div></div>
+        <div class="glass-card p-8 flex gap-6 reveal-up magnetic tilt" style="transition-delay:0.3s"><div class="bg-white/5 p-4 rounded-xl h-fit border border-white/10"><i data-lucide="rocket" class="w-8 h-8 text-accentMint"></i></div><div><h3 class="font-bold text-2xl mb-3 font-display">Optimization & UI/UX</h3><p class="text-textMuted font-light leading-relaxed">Modern user-focused design combined with deep performance and SEO optimizations.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE SECTION -->
+  <section id="experience" class="py-32 border-y border-white/5 relative bg-[#0C0C0C]/40 backdrop-blur-md">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center mb-20 reveal-up">
+        <h2 class="font-display font-black text-4xl md:text-5xl uppercase metal-text mb-4">Experience</h2>
+        <p class="text-textMuted max-w-2xl mx-auto">Real-world industry exposure and hands-on development.</p>
+      </div>
+
+      <div class="glass-card p-8 md:p-10 reveal-up">
+        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
+          <div>
+            <h3 class="font-display font-black text-2xl md:text-3xl mb-1">Web Development Intern</h3>
+            <p class="text-accentMint font-bold text-lg">Techpile Technology Pvt. Ltd</p>
+            <p class="text-textMuted text-sm mt-1"><i data-lucide="map-pin" class="w-3 h-3 inline mr-1"></i>Lucknow, Uttar Pradesh</p>
+          </div>
+          <div class="flex-shrink-0">
+            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accentCyan/40 text-accentCyan bg-accentCyan/10 text-sm font-bold">
+              <span class="w-2 h-2 rounded-full bg-accentCyan animate-pulse"></span>
+              Jan 2026 — Apr 2026
+            </span>
+            <p class="text-textMuted text-xs text-right mt-2 uppercase tracking-widest">Industrial Training · 90 Days</p>
+          </div>
+        </div>
+
+        <div class="w-full h-px bg-white/5 mb-6"></div>
+
+        <ul class="space-y-4">
+          <li class="flex gap-3 text-textMuted font-light leading-relaxed">
+            <span class="text-accentCyan mt-1 flex-shrink-0"><i data-lucide="chevron-right" class="w-4 h-4"></i></span>
+            Undergoing 90-day Industrial Training in Web Development using <span class="text-white font-medium mx-1">Python & Django</span>
+          </li>
+          <li class="flex gap-3 text-textMuted font-light leading-relaxed">
+            <span class="text-accentCyan mt-1 flex-shrink-0"><i data-lucide="chevron-right" class="w-4 h-4"></i></span>
+            Working on both <span class="text-white font-medium mx-1">frontend and backend</span> development tasks in a professional environment
+          </li>
+          <li class="flex gap-3 text-textMuted font-light leading-relaxed">
+            <span class="text-accentCyan mt-1 flex-shrink-0"><i data-lucide="chevron-right" class="w-4 h-4"></i></span>
+            Implementing <span class="text-white font-medium mx-1">CRUD operations, authentication, and database integration</span> on real projects
+          </li>
+          <li class="flex gap-3 text-textMuted font-light leading-relaxed">
+            <span class="text-accentCyan mt-1 flex-shrink-0"><i data-lucide="chevron-right" class="w-4 h-4"></i></span>
+            Gaining hands-on experience in <span class="text-white font-medium mx-1">real-world project development</span> and deployment workflows
+          </li>
+          <li class="flex gap-3 text-textMuted font-light leading-relaxed">
+            <span class="text-accentCyan mt-1 flex-shrink-0"><i data-lucide="chevron-right" class="w-4 h-4"></i></span>
+            Following <span class="text-white font-medium mx-1">industry coding practices</span> and structured development workflows
+          </li>
+        </ul>
+
+        <div class="flex flex-wrap gap-2 mt-8">
+          <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-textMuted border border-white/10">Python</span>
+          <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-textMuted border border-white/10">Django</span>
+          <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-textMuted border border-white/10">HTML5</span>
+          <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-textMuted border border-white/10">CSS3</span>
+          <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-textMuted border border-white/10">JavaScript</span>
+          <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-textMuted border border-white/10">MySQL</span>
+          <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-textMuted border border-white/10">Git</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION - FIXED -->
+  <section id="projects" class="py-32 border-y border-white/5 bg-[#0C0C0C]/40 backdrop-blur-md">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-24 reveal-up">
+        <h2 class="font-display font-black text-4xl md:text-5xl uppercase metal-text mb-4">Featured Work</h2>
+        <p class="text-textMuted">Cinematic showcases of recent technical builds.</p>
+      </div>
+      <div class="projects-wrapper pb-32">
+
+        {% for project in projects %}
+
+          {% if project.accent_color == 'cyan' %}
+            {% with accent="text-accentCyan" grad="from-accentCyan/20" %}
+            <article class="project-card glass-card p-8 md:p-12 mb-24 min-h-[60vh] flex flex-col justify-center border-t border-l border-white/10 bg-[#0C0C0C]">
+              <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div>
+                  <p class="{{ accent }} font-bold tracking-widest uppercase text-sm mb-4">Project 0{{ forloop.counter }}</p>
+                  <h3 class="font-display font-black text-3xl md:text-4xl mb-4">{{ project.title }}</h3>
+                  <div class="flex flex-wrap gap-2 mb-6">{% for tech in project.get_tech_list %}<span class="px-3 py-1 bg-white/5 rounded-full text-xs text-textMuted border border-white/10">{{ tech }}</span>{% endfor %}</div>
+                  <p class="text-textMuted font-light leading-relaxed mb-8">{{ project.description }}</p>
+                  <div class="flex gap-4">
+                    {% if project.live_url %}<a href="{{ project.live_url }}" target="_blank" class="btn btn-primary !py-2 !px-6 text-sm magnetic">Live Demo</a>{% endif %}
+                    {% if project.github_url %}<a href="{{ project.github_url }}" target="_blank" class="btn btn-ghost !py-2 !px-6 text-sm magnetic"><i data-lucide="github" class="w-4 h-4"></i> GitHub</a>{% endif %}
+                  </div>
+                </div>
+                <div class="relative rounded-2xl overflow-hidden aspect-video border border-white/10 shadow-2xl bg-gradient-to-br {{ grad }} to-transparent flex items-center justify-center">{% if project.image %}<img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-full object-cover">{% else %}<span class="text-6xl opacity-20">⬡</span>{% endif %}</div>
+              </div>
+            </article>
+            {% endwith %}
+
+          {% elif project.accent_color == 'mint' %}
+            {% with accent="text-accentMint" grad="from-accentMint/20" %}
+            <article class="project-card glass-card p-8 md:p-12 mb-24 min-h-[60vh] flex flex-col justify-center border-t border-l border-white/10 bg-[#0C0C0C]">
+              <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div>
+                  <p class="{{ accent }} font-bold tracking-widest uppercase text-sm mb-4">Project 0{{ forloop.counter }}</p>
+                  <h3 class="font-display font-black text-3xl md:text-4xl mb-4">{{ project.title }}</h3>
+                  <div class="flex flex-wrap gap-2 mb-6">{% for tech in project.get_tech_list %}<span class="px-3 py-1 bg-white/5 rounded-full text-xs text-textMuted border border-white/10">{{ tech }}</span>{% endfor %}</div>
+                  <p class="text-textMuted font-light leading-relaxed mb-8">{{ project.description }}</p>
+                  <div class="flex gap-4">
+                    {% if project.live_url %}<a href="{{ project.live_url }}" target="_blank" class="btn btn-primary !py-2 !px-6 text-sm magnetic">Live Demo</a>{% endif %}
+                    {% if project.github_url %}<a href="{{ project.github_url }}" target="_blank" class="btn btn-ghost !py-2 !px-6 text-sm magnetic"><i data-lucide="github" class="w-4 h-4"></i> GitHub</a>{% endif %}
+                  </div>
+                </div>
+                <div class="relative rounded-2xl overflow-hidden aspect-video border border-white/10 shadow-2xl bg-gradient-to-br {{ grad }} to-transparent flex items-center justify-center">{% if project.image %}<img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-full object-cover">{% else %}<span class="text-6xl opacity-20">⬡</span>{% endif %}</div>
+              </div>
+            </article>
+            {% endwith %}
+
+          {% elif project.accent_color == 'rose' %}
+            {% with accent="text-accentRose" grad="from-accentRose/20" %}
+            <article class="project-card glass-card p-8 md:p-12 mb-24 min-h-[60vh] flex flex-col justify-center border-t border-l border-white/10 bg-[#0C0C0C]">
+              <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div>
+                  <p class="{{ accent }} font-bold tracking-widest uppercase text-sm mb-4">Project 0{{ forloop.counter }}</p>
+                  <h3 class="font-display font-black text-3xl md:text-4xl mb-4">{{ project.title }}</h3>
+                  <div class="flex flex-wrap gap-2 mb-6">{% for tech in project.get_tech_list %}<span class="px-3 py-1 bg-white/5 rounded-full text-xs text-textMuted border border-white/10">{{ tech }}</span>{% endfor %}</div>
+                  <p class="text-textMuted font-light leading-relaxed mb-8">{{ project.description }}</p>
+                  <div class="flex gap-4">
+                    {% if project.live_url %}<a href="{{ project.live_url }}" target="_blank" class="btn btn-primary !py-2 !px-6 text-sm magnetic">Live Demo</a>{% endif %}
+                    {% if project.github_url %}<a href="{{ project.github_url }}" target="_blank" class="btn btn-ghost !py-2 !px-6 text-sm magnetic"><i data-lucide="github" class="w-4 h-4"></i> GitHub</a>{% endif %}
+                  </div>
+                </div>
+                <div class="relative rounded-2xl overflow-hidden aspect-video border border-white/10 shadow-2xl bg-gradient-to-br {{ grad }} to-transparent flex items-center justify-center">{% if project.image %}<img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-full object-cover">{% else %}<span class="text-6xl opacity-20">⬡</span>{% endif %}</div>
+              </div>
+            </article>
+            {% endwith %}
+
+          {% else %}
+            {% with accent="text-blue-400" grad="from-blue-500/20" %}
+            <article class="project-card glass-card p-8 md:p-12 mb-24 min-h-[60vh] flex flex-col justify-center border-t border-l border-white/10 bg-[#0C0C0C]">
+              <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div>
+                  <p class="{{ accent }} font-bold tracking-widest uppercase text-sm mb-4">Project 0{{ forloop.counter }}</p>
+                  <h3 class="font-display font-black text-3xl md:text-4xl mb-4">{{ project.title }}</h3>
+                  <div class="flex flex-wrap gap-2 mb-6">{% for tech in project.get_tech_list %}<span class="px-3 py-1 bg-white/5 rounded-full text-xs text-textMuted border border-white/10">{{ tech }}</span>{% endfor %}</div>
+                  <p class="text-textMuted font-light leading-relaxed mb-8">{{ project.description }}</p>
+                  <div class="flex gap-4">
+                    {% if project.live_url %}<a href="{{ project.live_url }}" target="_blank" class="btn btn-primary !py-2 !px-6 text-sm magnetic">Live Demo</a>{% endif %}
+                    {% if project.github_url %}<a href="{{ project.github_url }}" target="_blank" class="btn btn-ghost !py-2 !px-6 text-sm magnetic"><i data-lucide="github" class="w-4 h-4"></i> GitHub</a>{% endif %}
+                  </div>
+                </div>
+                <div class="relative rounded-2xl overflow-hidden aspect-video border border-white/10 shadow-2xl bg-gradient-to-br {{ grad }} to-transparent flex items-center justify-center">{% if project.image %}<img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-full object-cover">{% else %}<span class="text-6xl opacity-20">⬡</span>{% endif %}</div>
+              </div>
+            </article>
+            {% endwith %}
+
+          {% endif %}
+
+        {% endfor %}
+
+        {% if not projects %}
+        <p class="text-center text-textMuted py-20">No projects added yet. Add them from the admin panel.</p>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <section id="education" class="py-32 relative bg-transparent">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="text-center mb-20 reveal-up">
+        <h2 class="font-display font-black text-4xl md:text-5xl uppercase metal-text mb-4">Education</h2>
+        <p class="text-textMuted">The academic foundation.</p>
+      </div>
+      <div class="relative pl-10 md:pl-0">
+        <div class="timeline-line md:left-1/2 md:-ml-[1px]"></div>
+        <!-- MCA -->
+        <div class="relative mb-16 md:flex justify-between items-center w-full reveal-up">
+          <div class="timeline-dot top-8 md:left-1/2 md:-ml-[6px]"></div>
+          <div class="md:w-[45%] text-left md:text-right pr-8">
+            <p class="text-accentCyan font-bold tracking-widest text-xs uppercase mb-2">2024 — 2026</p>
+            <h3 class="font-display font-bold text-2xl mb-1">Master of Computer Applications</h3>
+            <p class="text-textMuted text-sm font-light">Babu Banarsi Das University (BBDU)</p>
+            <span class="inline-block mt-2 px-3 py-1 rounded-full text-xs font-semibold border border-accentCyan/40 text-accentCyan bg-accentCyan/10">Currently Pursuing</span>
+          </div>
+          <div class="hidden md:block md:w-[45%]"></div>
+        </div>
+
+        <!-- BCA -->
+        <div class="relative md:flex justify-between items-center w-full reveal-up">
+          <div class="timeline-dot top-8 md:left-1/2 md:-ml-[6px]"></div>
+          <div class="hidden md:block md:w-[45%]"></div>
+          <div class="md:w-[45%] text-left pl-0 md:pl-8 mt-6 md:mt-0">
+            <p class="text-accentMint font-bold tracking-widest text-xs uppercase mb-2">2021 — 2024</p>
+            <h3 class="font-display font-bold text-2xl mb-1">Bachelor of Computer Applications</h3>
+            <p class="text-textMuted text-sm font-light">LU, Lucknow Public College of Professional Studies</p>
+            <span class="inline-block mt-2 px-3 py-1 rounded-full text-xs font-semibold border border-accentMint/40 text-accentMint bg-accentMint/10">Completed</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="contact" class="py-32 border-t border-white/5 relative bg-[#0C0C0C]/50 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16">
+        <div class="reveal-up">
+          <h2 class="font-display font-black text-4xl md:text-6xl uppercase metal-text mb-6 leading-tight">Let's Work<br/>Together</h2>
+          <p class="text-textMuted text-lg font-light leading-relaxed mb-10 max-w-md">Looking to start a project or just want to say hi? Let's connect and build something amazing together.</p>
+          <!-- Contact Info -->
+          <div class="flex flex-col gap-3 mb-8">
+            <a href="mailto:prajjwaldixit96@gmail.com" class="flex items-center gap-3 text-textMuted hover:text-white transition-colors group">
+              <span class="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center group-hover:border-accentCyan transition-all"><i data-lucide="mail" class="w-4 h-4"></i></span>
+              prajjwaldixit96@gmail.com
+            </a>
+            <a href="tel:9569613673" class="flex items-center gap-3 text-textMuted hover:text-white transition-colors group">
+              <span class="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center group-hover:border-accentMint transition-all"><i data-lucide="phone" class="w-4 h-4"></i></span>
+              +91 9569613673
+            </a>
+            <span class="flex items-center gap-3 text-textMuted">
+              <span class="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center"><i data-lucide="map-pin" class="w-4 h-4"></i></span>
+              Lucknow, Uttar Pradesh
+            </span>
+          </div>
+          <div class="flex gap-4 mb-10">
+            <a href="https://github.com/prajjwaldixit96-dev" target="_blank" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-accentCyan transition-all magnetic tilt">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.165c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/prajjwaldixit" target="_blank" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-accentMint transition-all magnetic tilt">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="mailto:prajjwaldixit96@gmail.com" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-accentRose transition-all magnetic tilt">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </a>
+          </div>
+        </div>
+        <form class="glass-card p-8 md:p-10 reveal-up tilt" id="contactForm">
+          <div class="grid grid-cols-2 gap-6 mb-6">
+            <div><label class="block text-xs font-bold uppercase tracking-widest text-textMuted mb-2">Name</label><input type="text" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accentCyan transition-colors" placeholder="John Doe" name="name" id="fieldName"></div>
+            <div><label class="block text-xs font-bold uppercase tracking-widest text-textMuted mb-2">Email</label><input type="email" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accentCyan transition-colors" placeholder="john@example.com" name="email" id="fieldEmail"></div>
+          </div>
+          <div class="mb-6"><label class="block text-xs font-bold uppercase tracking-widest text-textMuted mb-2">Subject</label><input type="text" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accentCyan transition-colors" placeholder="Project Inquiry" name="subject" id="fieldSubject"></div>
+          <div class="mb-8"><label class="block text-xs font-bold uppercase tracking-widest text-textMuted mb-2">Message</label><textarea rows="4" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accentCyan transition-colors resize-none" placeholder="Hello Prajjwal..." name="message" id="fieldMessage"></textarea></div>
+          <div class="flex flex-wrap gap-4">
+            <button type="submit" id="submitBtn" class="btn btn-primary flex-1 magnetic"><i data-lucide="send" class="w-4 h-4"></i> <span id="btnText">Send Message</span></button>
+            <a href="{% static 'resume/prajjwal_resume.pdf' %}" download class="btn btn-ghost flex-1 magnetic"><i data-lucide="download" class="w-4 h-4"></i> Download Resume</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+  <footer class="py-20 border-t border-white/10 relative overflow-hidden bg-[#0C0C0C]/80 backdrop-blur-lg">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="font-display font-black text-[clamp(2rem,6vw,8rem)] text-white/5 whitespace-nowrap mb-10 select-none">LET'S BUILD SOMETHING AMAZING</h2>
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6 text-sm font-semibold text-textMuted uppercase tracking-wider">
+        <p>Copyright &copy; 2026 Prajjwal</p>
+        <div class="flex gap-6">
+          <a href="#about" class="hover:text-white transition-colors">About</a>
+          <a href="#projects" class="hover:text-white transition-colors">Projects</a>
+          <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      lucide.createIcons();
+      const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time) => lenis.raf(time * 1000));
+      gsap.ticker.lagSmoothing(0);
+      const tlLoader = gsap.timeline({ onComplete: () => { document.body.classList.remove('loading'); initHeroAnimations(); } });
+      tlLoader.to("#loader-bar", { width: "100%", duration: 1.5, ease: "power2.inOut", onUpdate: function() { document.getElementById('loader-count').innerText = Math.round(this.progress() * 100) + '%'; } }).to(".loader", { yPercent: -100, duration: 0.8, ease: "power4.inOut" }, "+=0.2");
+      const cursorDot = document.querySelector('.cursor-dot');
+      const cursorRing = document.querySelector('.cursor-ring');
+      let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2, ringX = mouseX, ringY = mouseY;
+      window.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; if(cursorDot) cursorDot.style.transform = `translate(${mouseX}px,${mouseY}px) translate(-50%,-50%)`; });
+      gsap.ticker.add(() => { ringX += (mouseX - ringX) * 0.15; ringY += (mouseY - ringY) * 0.15; if(cursorRing) cursorRing.style.transform = `translate(${ringX}px,${ringY}px) translate(-50%,-50%)`; });
+      document.querySelectorAll('a,button,input,textarea,.tilt').forEach(el => { el.addEventListener('mouseenter', () => cursorRing?.classList.add('hovering')); el.addEventListener('mouseleave', () => cursorRing?.classList.remove('hovering')); });
+      document.querySelectorAll('.magnetic').forEach(el => {
+        el.addEventListener('mousemove', (e) => { const r = el.getBoundingClientRect(); gsap.to(el, { x: (e.clientX - r.left - r.width/2)*0.3, y: (e.clientY - r.top - r.height/2)*0.3, duration: 0.3, ease: 'power2.out' }); });
+        el.addEventListener('mouseleave', () => gsap.to(el, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1,0.3)' }));
+      });
+      document.querySelectorAll('.tilt').forEach(el => {
+        el.addEventListener('mousemove', (e) => { const r = el.getBoundingClientRect(); gsap.to(el, { rotationY: ((e.clientX-r.left)/r.width-0.5)*15, rotationX: -((e.clientY-r.top)/r.height-0.5)*15, transformPerspective: 1000, ease: 'power1.out', duration: 0.3 }); });
+        el.addEventListener('mouseleave', () => gsap.to(el, { rotationY: 0, rotationX: 0, duration: 0.5, ease: 'power2.out' }));
+      });
+      const techList = [
+        { name: 'HTML5', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
+        { name: 'CSS3', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
+        { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
+        { name: 'Bootstrap 5', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg' },
+        { name: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
+        { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+        { name: 'Django', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg' },
+        { name: 'Java', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
+        { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+        { name: 'SQLite', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg' },
+        { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
+        { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' },
+        { name: 'VS Code', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg' },
+      ];
+      const track = document.getElementById('marquee-track');
+      let html = '';
+      for(let i=0;i<4;i++) techList.forEach(t => { let f = ['GitHub','Django','Git'].includes(t.name) ? 'filter:invert(1);opacity:0.8;' : ''; html += `<div class="tech-pill"><img src="${t.icon}" alt="${t.name}" style="${f}"> ${t.name}</div>`; });
+      if(track) track.innerHTML = html;
+      gsap.registerPlugin(ScrollTrigger);
+      function initHeroAnimations() {
+        gsap.to(".hero-title", { opacity: 1, duration: 1.5, ease: "power3.out" });
+        gsap.to(".hero-kicker", { opacity: 1, y: 0, duration: 1, delay: 0.3, ease: "power3.out" });
+        gsap.to(".hero-subtitle", { opacity: 1, y: 0, duration: 1, delay: 0.5, ease: "power3.out" });
+        gsap.to("#hero-btns", { opacity: 1, y: 0, duration: 1, delay: 0.7, ease: "power3.out" });
+      }
+      gsap.utils.toArray('.reveal-up').forEach(elem => { gsap.fromTo(elem, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out", scrollTrigger: { trigger: elem, start: "top 85%" } }); });
+      gsap.utils.toArray('.counter').forEach(counter => {
+        ScrollTrigger.create({ trigger: counter, start: "top 90%", once: true, onEnter: () => {
+          const target = parseInt(counter.getAttribute('data-target'));
+          gsap.to(counter, { innerHTML: target, duration: 2, ease: "power2.out", snap: { innerHTML: 1 }, onUpdate: function() { counter.innerHTML = Math.round(this.targets()[0].innerHTML) + (target > 1000 ? '+' : ''); } });
+        }});
+      });
+      const projects = gsap.utils.toArray('.project-card');
+      projects.forEach((proj, i) => { ScrollTrigger.create({ trigger: proj, start: `top ${120+(i*30)}px`, endTrigger: ".projects-wrapper", end: "bottom bottom", scrub: true, animation: gsap.to(proj, { scale: 1-((projects.length-1-i)*0.04), opacity: 0.5+(i*0.1), ease: "none" }) }); });
+      initThreeJS();
+    });
+    function initThreeJS() {
+      const canvas = document.getElementById('bg-canvas');
+      if (!canvas || !window.THREE) return;
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x0C0C0C, 0.02);
+      const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
+      camera.position.z = 15;
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      const parallaxGroup = new THREE.Group(); scene.add(parallaxGroup);
+      const scrollGroup = new THREE.Group(); parallaxGroup.add(scrollGroup);
+      const wireMat = new THREE.MeshBasicMaterial({ color: 0xA855F7, wireframe: true, transparent: true, opacity: 0.25 });
+      const solidMat = new THREE.MeshStandardMaterial({ color: 0x7C3AED, roughness: 0.4, metalness: 0.8 });
+      const glowMat = new THREE.MeshBasicMaterial({ color: 0xC084FC, wireframe: true, transparent: true, opacity: 0.4 });
+      const accentMat = new THREE.MeshStandardMaterial({ color: 0xA855F7, roughness: 0.2, metalness: 0.9 });
+      const shapes = [];
+      function addShape(geo, mat, x, y, z, rx, ry) { const m = new THREE.Mesh(geo, mat); m.position.set(x,y,z); scrollGroup.add(m); shapes.push({mesh:m, rx, ry, baseY:y}); }
+      addShape(new THREE.IcosahedronGeometry(4,1), wireMat, 0,0,0, 0.002,0.003);
+      addShape(new THREE.TorusGeometry(3,0.8,16,100), solidMat, -6,3,-5, 0.005,0.002);
+      addShape(new THREE.OctahedronGeometry(2,0), glowMat, 7,-4,-3, -0.004,0.005);
+      for(let i=0;i<70;i++) {
+        const t = Math.floor(Math.random()*5);
+        let geo = t===0 ? new THREE.TorusKnotGeometry(1.5,0.4,64,8) : t===1 ? new THREE.IcosahedronGeometry(Math.random()*2+1,0) : t===2 ? new THREE.BoxGeometry(2,2,2) : t===3 ? new THREE.ConeGeometry(1.5,3,4) : new THREE.TetrahedronGeometry(2,0);
+        const mr = Math.random(); let mat = mr>0.6 ? solidMat : mr>0.3 ? accentMat : wireMat;
+        addShape(geo, mat, (Math.random()-0.5)*50, -Math.random()*350-10, (Math.random()-0.5)*35-10, (Math.random()-0.5)*0.01, (Math.random()-0.5)*0.01);
+      }
+      const pg = new THREE.BufferGeometry(); const pa = new Float32Array(3000*3);
+      for(let i=0;i<3000*3;i++) { pa[i]=(Math.random()-0.5)*(i%3===1?420:60)-(i%3===1?190:0); }
+      pg.setAttribute('position', new THREE.BufferAttribute(pa,3));
+      const pm = new THREE.Points(pg, new THREE.PointsMaterial({size:0.05,color:0xC084FC,transparent:true,opacity:0.6}));
+      scrollGroup.add(pm);
+      scene.add(new THREE.AmbientLight(0xffffff,0.5));
+      const pl1=new THREE.PointLight(0xA855F7,2,80); pl1.position.set(5,5,5); scrollGroup.add(pl1);
+      const pl2=new THREE.PointLight(0x7C3AED,2,80); pl2.position.set(-5,-5,5); scrollGroup.add(pl2);
+      let mx=0,my=0,sy=window.scrollY;
+      window.addEventListener('mousemove',e=>{mx=(e.clientX-window.innerWidth/2)*0.001;my=(e.clientY-window.innerHeight/2)*0.001;});
+      window.addEventListener('scroll',()=>sy=window.scrollY);
+      window.addEventListener('resize',()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight);});
+      const clock=new THREE.Clock();
+      function animate() {
+        requestAnimationFrame(animate);
+        const t=clock.getElapsedTime();
+        camera.position.y=-sy*0.05;
+        shapes.forEach((o,i)=>{o.mesh.rotation.x+=o.rx;o.mesh.rotation.y+=o.ry;o.mesh.position.y=o.baseY+Math.sin(t*0.5+i)*0.5;});
+        pm.rotation.y=t*0.02;
+        parallaxGroup.rotation.y+=0.05*(mx*2-parallaxGroup.rotation.y);
+        parallaxGroup.rotation.x+=0.05*(my*2-parallaxGroup.rotation.x);
+        renderer.render(scene,camera);
+      }
+      animate();
+      gsap.to(scrollGroup.rotation,{y:Math.PI,ease:"none",scrollTrigger:{trigger:"body",start:"top top",end:"bottom bottom",scrub:1}});
+    }
+  </script>
+  <div id="toast" class="fixed bottom-8 right-8 z-[9999] flex items-center gap-3 px-6 py-4 rounded-xl border backdrop-blur-xl text-sm font-semibold transition-all duration-500 translate-y-24 opacity-0 pointer-events-none" style="background:rgba(12,12,12,0.95);">
+    <span id="toastIcon" class="text-lg"></span><span id="toastMsg"></span>
+  </div>
+  <script>
+    (function(){
+      const form=document.getElementById('contactForm'); if(!form) return;
+      const toast=document.getElementById('toast'),toastMsg=document.getElementById('toastMsg'),toastIcon=document.getElementById('toastIcon'),submitBtn=document.getElementById('submitBtn'),btnText=document.getElementById('btnText');
+      function showToast(msg,type){toast.classList.remove('border-green-500/40','border-red-500/40','text-green-400','text-red-400');toast.classList.add(type==='success'?'border-green-500/40':'border-red-500/40',type==='success'?'text-green-400':'text-red-400');toastIcon.textContent=type==='success'?'✓':'✕';toastMsg.textContent=msg;toast.classList.remove('translate-y-24','opacity-0');toast.classList.add('translate-y-0','opacity-100');setTimeout(()=>{toast.classList.add('translate-y-24','opacity-0');toast.classList.remove('translate-y-0','opacity-100');},4000);}
+      function clearFieldErrors(){form.querySelectorAll('.field-error').forEach(e=>e.remove());form.querySelectorAll('input,textarea').forEach(e=>{e.classList.remove('border-red-500/70');e.classList.add('border-white/10');});}
+      function showFieldError(id,msg){const f=document.getElementById(id);if(!f)return;f.classList.remove('border-white/10');f.classList.add('border-red-500/70');const e=document.createElement('p');e.className='field-error text-red-400 text-xs mt-1';e.textContent=msg;f.parentNode.appendChild(e);}
+      const csrf=document.querySelector('[name=csrfmiddlewaretoken]')?.value;
+      form.addEventListener('submit',async function(e){
+        e.preventDefault();clearFieldErrors();
+        const data={name:document.getElementById('fieldName').value,email:document.getElementById('fieldEmail').value,subject:document.getElementById('fieldSubject').value,message:document.getElementById('fieldMessage').value};
+        submitBtn.disabled=true;btnText.textContent='Sending...';submitBtn.style.opacity='0.7';
+        try{
+          const res=await fetch('/contact/submit/',{method:'POST',headers:{'Content-Type':'application/json','X-CSRFToken':csrf},body:JSON.stringify(data)});
+          const result=await res.json();
+          if(result.success){showToast(result.message,'success');form.reset();}
+          else if(result.errors){const fm={name:'fieldName',email:'fieldEmail',subject:'fieldSubject',message:'fieldMessage'};let hasErr=false;for(const[k,m] of Object.entries(result.errors)){if(fm[k]){showFieldError(fm[k],m);hasErr=true;}else showToast(m,'error');}if(!hasErr&&!result.errors.general)showToast('Please fix the errors above.','error');}
+        }catch(err){showToast('Network error. Please try again.','error');}
+        finally{submitBtn.disabled=false;btnText.textContent='Send Message';submitBtn.style.opacity='1';}
+      });
+    })();
+  </script>
+</body>
+</html>

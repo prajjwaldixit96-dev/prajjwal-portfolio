@@ -1,0 +1,39 @@
+<svg width="1200" height="820" viewBox="0 0 1200 820" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="820" rx="36" fill="#070B0D"/>
+  <rect x="44" y="48" width="1112" height="724" rx="28" fill="url(#panel)" stroke="url(#stroke)" stroke-width="2"/>
+  <circle cx="96" cy="92" r="10" fill="#A855F7"/>
+  <circle cx="128" cy="92" r="10" fill="#C084FC"/>
+  <circle cx="160" cy="92" r="10" fill="#7C3AED"/>
+  <rect x="78" y="150" width="298" height="548" rx="24" fill="#0E171A" stroke="#24484F"/>
+  <rect x="412" y="150" width="750" height="548" rx="24" fill="#091113" stroke="#1C3840"/>
+  <path d="M232 283C232 236 270 198 317 198C364 198 402 236 402 283V336H368V283C368 255 345 232 317 232C289 232 266 255 266 283V336H232V283Z" fill="#A855F7"/>
+  <rect x="205" y="326" width="230" height="178" rx="24" fill="url(#lock)" stroke="#E9D5FF" stroke-width="2"/>
+  <circle cx="320" cy="408" r="28" fill="#061012" stroke="#F5EFFF" stroke-width="3"/>
+  <path d="M320 434V468" stroke="#F5EFFF" stroke-width="12" stroke-linecap="round"/>
+  <text x="112" y="590" fill="#F5EFFF" font-family="Sora, Arial" font-size="34" font-weight="800">Encrypted Vault</text>
+  <text x="112" y="636" fill="#8EA6B2" font-family="Sora, Arial" font-size="22">Zero-knowledge sharing</text>
+  <rect x="468" y="214" width="620" height="74" rx="18" fill="#102126"/>
+  <rect x="500" y="240" width="230" height="20" rx="10" fill="#A855F7"/>
+  <rect x="468" y="324" width="620" height="74" rx="18" fill="#102126"/>
+  <rect x="500" y="350" width="310" height="20" rx="10" fill="#C084FC"/>
+  <rect x="468" y="434" width="620" height="74" rx="18" fill="#102126"/>
+  <rect x="500" y="460" width="270" height="20" rx="10" fill="#7C3AED"/>
+  <rect x="468" y="544" width="370" height="96" rx="22" fill="#101B20" stroke="#2B5B65"/>
+  <path d="M510 596H794" stroke="#A855F7" stroke-width="8" stroke-linecap="round" stroke-dasharray="1 22"/>
+  <defs>
+    <linearGradient id="panel" x1="44" y1="48" x2="1040" y2="858" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#172429"/>
+      <stop offset="1" stop-color="#091012"/>
+    </linearGradient>
+    <linearGradient id="stroke" x1="44" y1="48" x2="1156" y2="772" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A855F7"/>
+      <stop offset=".5" stop-color="#FFFFFF" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#C084FC"/>
+    </linearGradient>
+    <linearGradient id="lock" x1="205" y1="326" x2="435" y2="504" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A855F7"/>
+      <stop offset=".55" stop-color="#183C44"/>
+      <stop offset="1" stop-color="#C084FC"/>
+    </linearGradient>
+  </defs>
+</svg>
