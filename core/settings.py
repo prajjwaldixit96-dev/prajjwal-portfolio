@@ -3,9 +3,8 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-change-this-in-production-prajjwal-portfolio-2026'
-
-DEBUG = True
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-change-this-in-production-prajjwal-portfolio-2026')
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['*']
 
@@ -21,6 +20,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -86,3 +86,5 @@ EMAIL_HOST_USER = 'prajjwaldixit96@gmail.com'   # Tera Gmail
 EMAIL_HOST_PASSWORD = 'cjkd wkiv tehy qzot'   # App Password (neeche steps hain)
 DEFAULT_FROM_EMAIL = 'Prajjwal Portfolio <prajjwaldixit96@gmail.com>'
 CONTACT_EMAIL = 'prajjwaldixit96@gmail.com'      # Yahan email aayegi
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
