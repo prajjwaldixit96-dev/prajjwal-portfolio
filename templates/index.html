@@ -69,6 +69,10 @@
     .timeline-dot { position: absolute; left: -5px; width: 12px; height: 12px; border-radius: 50%; background: #A855F7; box-shadow: 0 0 10px #A855F7; }
     canvas#bg-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
     section,nav,footer { position: relative; z-index: 10; }
+    #mobileMenu a { -webkit-tap-highlight-color: transparent; }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track { animation: none; }
+    }
   </style>
 </head>
 <body class="loading text-white">
@@ -92,6 +96,17 @@
         <a href="#projects" class="hover:text-white transition-colors magnetic">Projects</a>
       </div>
       <a href="#contact" class="hidden md:inline-flex btn btn-ghost !py-2 !px-5 !text-xs magnetic">Let's Talk</a>
+      <button id="mobileMenuBtn" class="md:hidden flex items-center justify-center w-10 h-10 text-white" aria-label="Toggle menu" aria-expanded="false">
+        <i data-lucide="menu" class="w-6 h-6" id="menuIconOpen"></i>
+        <i data-lucide="x" class="w-6 h-6 hidden" id="menuIconClose"></i>
+      </button>
+    </div>
+    <div id="mobileMenu" class="md:hidden hidden max-w-7xl mx-auto px-6 pb-6 pt-2 border-t border-white/5 mt-4">
+      <a href="#about" class="mobile-nav-link block py-3 text-textMuted hover:text-white font-medium uppercase tracking-wider text-sm border-b border-white/5">About</a>
+      <a href="#skills" class="mobile-nav-link block py-3 text-textMuted hover:text-white font-medium uppercase tracking-wider text-sm border-b border-white/5">Skills</a>
+      <a href="#experience" class="mobile-nav-link block py-3 text-textMuted hover:text-white font-medium uppercase tracking-wider text-sm border-b border-white/5">Experience</a>
+      <a href="#projects" class="mobile-nav-link block py-3 text-textMuted hover:text-white font-medium uppercase tracking-wider text-sm border-b border-white/5">Projects</a>
+      <a href="#contact" class="mobile-nav-link btn btn-primary justify-center w-full mt-4 magnetic">Let's Talk</a>
     </div>
   </nav>
   <section class="relative min-h-screen flex items-center pt-20 overflow-hidden" id="hero">
@@ -100,10 +115,10 @@
         <p class="hero-kicker text-accentMint font-bold uppercase tracking-[0.2em] text-sm mb-6 flex items-center gap-4 opacity-0 transform translate-y-4">
           <span class="w-10 h-[2px] bg-accentMint"></span> Full Stack Developer & AI Enthusiast
         </p>
-        <h1 class="hero-title font-display font-black text-[clamp(3rem,8vw,6rem)] leading-[1.1] tracking-tight mb-6 opacity-0">
+        <h1 class="hero-title font-display font-black text-[clamp(2.5rem,9vw,6rem)] leading-[1.1] tracking-tight mb-6 opacity-0">
           <span class="metal-text uppercase block">Prajjwal Dixit</span>
         </h1>
-        <p class="hero-subtitle text-textMuted text-lg md:text-xl font-light max-w-2xl leading-relaxed mb-10 opacity-0 transform translate-y-4">
+        <p class="hero-subtitle text-textMuted text-base md:text-lg lg:text-xl font-light max-w-2xl leading-relaxed mb-10 opacity-0 transform translate-y-4">
           I build scalable web applications, AI-powered solutions, and immersive digital experiences that combine creativity, innovation, and performance.
         </p>
         <div class="flex flex-wrap gap-4 opacity-0 transform translate-y-4" id="hero-btns">
@@ -116,37 +131,37 @@
   <section class="py-10 border-y border-white/5 bg-[#0C0C0C]/50 backdrop-blur-sm">
     <div class="marquee-container"><div class="marquee-track" id="marquee-track"></div></div>
   </section>
-  <section id="about" class="py-32 relative bg-transparent">
+  <section id="about" class="py-20 md:py-32 relative bg-transparent">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <div class="reveal-up">
           <h2 class="font-display font-black text-4xl md:text-5xl uppercase metal-text mb-6">About Me</h2>
           <p class="text-textMuted text-lg leading-relaxed mb-6 font-light">I am Prajjwal, a passionate Full Stack Developer dedicated to building modern, scalable, and user-centric digital solutions. I enjoy transforming innovative ideas into real-world applications while continuously exploring emerging technologies and AI-driven solutions.</p>
         </div>
         <div class="grid grid-cols-2 gap-4">
-          <div class="glass-card p-8 text-center reveal-up magnetic tilt">
-            <h3 class="font-display font-black text-5xl metal-text mb-2 counter" data-target="25">0</h3>
+          <div class="glass-card p-6 md:p-8 text-center reveal-up magnetic tilt">
+            <h3 class="font-display font-black text-4xl md:text-5xl metal-text mb-2 counter" data-target="25">0</h3>
             <p class="text-sm font-semibold uppercase tracking-widest text-textMuted">Projects<br/>Completed</p>
           </div>
-          <div class="glass-card p-8 text-center reveal-up magnetic tilt" style="transition-delay:0.1s">
-            <h3 class="font-display font-black text-5xl metal-text mb-2 counter" data-target="15">0</h3>
+          <div class="glass-card p-6 md:p-8 text-center reveal-up magnetic tilt" style="transition-delay:0.1s">
+            <h3 class="font-display font-black text-4xl md:text-5xl metal-text mb-2 counter" data-target="15">0</h3>
             <p class="text-sm font-semibold uppercase tracking-widest text-textMuted">Technologies<br/>Mastered</p>
           </div>
-          <div class="glass-card p-8 text-center reveal-up magnetic tilt lg:col-span-2" style="transition-delay:0.2s">
-            <h3 class="font-display font-black text-5xl metal-text mb-2 counter" data-target="2500">0</h3>
+          <div class="glass-card p-6 md:p-8 text-center reveal-up magnetic tilt lg:col-span-2" style="transition-delay:0.2s">
+            <h3 class="font-display font-black text-4xl md:text-5xl metal-text mb-2 counter" data-target="2500">0</h3>
             <p class="text-sm font-semibold uppercase tracking-widest text-textMuted">Coding Hours</p>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <section id="skills" class="py-32 border-y border-white/5 relative bg-[#0C0C0C]/40 backdrop-blur-md">
+  <section id="skills" class="py-20 md:py-32 border-y border-white/5 relative bg-[#0C0C0C]/40 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-20 reveal-up">
+      <div class="text-center mb-12 md:mb-20 reveal-up">
         <h2 class="font-display font-black text-4xl md:text-5xl uppercase metal-text mb-4">Core Skills</h2>
         <p class="text-textMuted max-w-2xl mx-auto">Mastery across the modern full-stack spectrum.</p>
       </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <div class="glass-card p-8 reveal-up tilt"><i data-lucide="layout" class="w-10 h-10 text-accentCyan mb-6"></i><h3 class="font-bold text-xl mb-4 font-display">Frontend</h3><ul class="space-y-2 text-textMuted font-light"><li>HTML5 / CSS3</li><li>JavaScript (ES6+)</li><li>Bootstrap 5</li><li>Tailwind CSS</li></ul></div>
         <div class="glass-card p-8 reveal-up tilt" style="transition-delay:0.1s"><i data-lucide="server" class="w-10 h-10 text-accentMint mb-6"></i><h3 class="font-bold text-xl mb-4 font-display">Backend</h3><ul class="space-y-2 text-textMuted font-light"><li>Python</li><li>Django</li><li>REST APIs</li><li>Java</li></ul></div>
         <div class="glass-card p-8 reveal-up tilt" style="transition-delay:0.2s"><i data-lucide="database" class="w-10 h-10 text-accentRose mb-6"></i><h3 class="font-bold text-xl mb-4 font-display">Database</h3><ul class="space-y-2 text-textMuted font-light"><li>MySQL</li><li>SQLite</li></ul></div>
@@ -154,9 +169,9 @@
       </div>
     </div>
   </section>
-  <section id="services" class="py-32 relative bg-transparent">
+  <section id="services" class="py-20 md:py-32 relative bg-transparent">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-20 reveal-up">
+      <div class="text-center mb-12 md:mb-20 reveal-up">
         <h2 class="font-display font-black text-4xl md:text-5xl uppercase metal-text mb-4">Services</h2>
         <p class="text-textMuted max-w-2xl mx-auto">Premium digital solutions tailored for your business.</p>
       </div>
@@ -170,13 +185,13 @@
   </section>
 
   <!-- EXPERIENCE SECTION -->
-  <section id="experience" class="py-32 border-y border-white/5 relative bg-[#0C0C0C]/40 backdrop-blur-md">
+  <section id="experience" class="py-20 md:py-32 border-y border-white/5 relative bg-[#0C0C0C]/40 backdrop-blur-md">
     <div class="max-w-4xl mx-auto px-6">
-      <div class="text-center mb-20 reveal-up">
+      <div class="text-center mb-12 md:mb-20 reveal-up">
         <h2 class="font-display font-black text-4xl md:text-5xl uppercase metal-text mb-4">Experience</h2>
         <p class="text-textMuted max-w-2xl mx-auto">Real-world industry exposure and hands-on development.</p>
       </div>
-      <div class="glass-card p-8 md:p-10 reveal-up">
+      <div class="glass-card p-6 md:p-10 reveal-up">
         <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
           <div>
             <h3 class="font-display font-black text-2xl md:text-3xl mb-1">Web Development Intern</h3>
@@ -213,24 +228,24 @@
   </section>
 
   <!-- PROJECTS SECTION -->
-  <section id="projects" class="py-32 border-y border-white/5 bg-[#0C0C0C]/40 backdrop-blur-md">
+  <section id="projects" class="py-20 md:py-32 border-y border-white/5 bg-[#0C0C0C]/40 backdrop-blur-md">
     <div class="max-w-5xl mx-auto px-6">
-      <div class="text-center mb-24 reveal-up">
+      <div class="text-center mb-16 md:mb-24 reveal-up">
         <h2 class="font-display font-black text-4xl md:text-5xl uppercase metal-text mb-4">Featured Work</h2>
         <p class="text-textMuted">Cinematic showcases of recent technical builds.</p>
       </div>
-      <div class="projects-wrapper pb-32">
+      <div class="projects-wrapper pb-16 md:pb-32">
         {% for project in projects %}
           {% if project.accent_color == 'cyan' %}
             {% with accent="text-accentCyan" grad="from-accentCyan/20" %}
-            <article class="project-card glass-card p-8 md:p-12 mb-24 min-h-[60vh] flex flex-col justify-center border-t border-l border-white/10 bg-[#0C0C0C]">
-              <div class="grid md:grid-cols-2 gap-10 items-center">
+            <article class="project-card glass-card p-6 md:p-12 mb-16 md:mb-24 md:min-h-[60vh] flex flex-col justify-center border-t border-l border-white/10 bg-[#0C0C0C]">
+              <div class="grid md:grid-cols-2 gap-6 md:gap-10 items-center">
                 <div>
                   <p class="{{ accent }} font-bold tracking-widest uppercase text-sm mb-4">Project 0{{ forloop.counter }}</p>
                   <h3 class="font-display font-black text-3xl md:text-4xl mb-4">{{ project.title }}</h3>
                   <div class="flex flex-wrap gap-2 mb-6">{% for tech in project.get_tech_list %}<span class="px-3 py-1 bg-white/5 rounded-full text-xs text-textMuted border border-white/10">{{ tech }}</span>{% endfor %}</div>
                   <p class="text-textMuted font-light leading-relaxed mb-8">{{ project.description }}</p>
-                  <div class="flex gap-4">
+                  <div class="flex flex-wrap gap-4">
                     {% if project.live_url %}<a href="{{ project.live_url }}" target="_blank" class="btn btn-primary !py-2 !px-6 text-sm magnetic">Live Demo</a>{% endif %}
                     {% if project.github_url %}<a href="{{ project.github_url }}" target="_blank" class="btn btn-ghost !py-2 !px-6 text-sm magnetic"><i data-lucide="github" class="w-4 h-4"></i> GitHub</a>{% endif %}
                   </div>
@@ -241,14 +256,14 @@
             {% endwith %}
           {% elif project.accent_color == 'mint' %}
             {% with accent="text-accentMint" grad="from-accentMint/20" %}
-            <article class="project-card glass-card p-8 md:p-12 mb-24 min-h-[60vh] flex flex-col justify-center border-t border-l border-white/10 bg-[#0C0C0C]">
-              <div class="grid md:grid-cols-2 gap-10 items-center">
+            <article class="project-card glass-card p-6 md:p-12 mb-16 md:mb-24 md:min-h-[60vh] flex flex-col justify-center border-t border-l border-white/10 bg-[#0C0C0C]">
+              <div class="grid md:grid-cols-2 gap-6 md:gap-10 items-center">
                 <div>
                   <p class="{{ accent }} font-bold tracking-widest uppercase text-sm mb-4">Project 0{{ forloop.counter }}</p>
                   <h3 class="font-display font-black text-3xl md:text-4xl mb-4">{{ project.title }}</h3>
                   <div class="flex flex-wrap gap-2 mb-6">{% for tech in project.get_tech_list %}<span class="px-3 py-1 bg-white/5 rounded-full text-xs text-textMuted border border-white/10">{{ tech }}</span>{% endfor %}</div>
                   <p class="text-textMuted font-light leading-relaxed mb-8">{{ project.description }}</p>
-                  <div class="flex gap-4">
+                  <div class="flex flex-wrap gap-4">
                     {% if project.live_url %}<a href="{{ project.live_url }}" target="_blank" class="btn btn-primary !py-2 !px-6 text-sm magnetic">Live Demo</a>{% endif %}
                     {% if project.github_url %}<a href="{{ project.github_url }}" target="_blank" class="btn btn-ghost !py-2 !px-6 text-sm magnetic"><i data-lucide="github" class="w-4 h-4"></i> GitHub</a>{% endif %}
                   </div>
@@ -259,14 +274,14 @@
             {% endwith %}
           {% elif project.accent_color == 'rose' %}
             {% with accent="text-accentRose" grad="from-accentRose/20" %}
-            <article class="project-card glass-card p-8 md:p-12 mb-24 min-h-[60vh] flex flex-col justify-center border-t border-l border-white/10 bg-[#0C0C0C]">
-              <div class="grid md:grid-cols-2 gap-10 items-center">
+            <article class="project-card glass-card p-6 md:p-12 mb-16 md:mb-24 md:min-h-[60vh] flex flex-col justify-center border-t border-l border-white/10 bg-[#0C0C0C]">
+              <div class="grid md:grid-cols-2 gap-6 md:gap-10 items-center">
                 <div>
                   <p class="{{ accent }} font-bold tracking-widest uppercase text-sm mb-4">Project 0{{ forloop.counter }}</p>
                   <h3 class="font-display font-black text-3xl md:text-4xl mb-4">{{ project.title }}</h3>
                   <div class="flex flex-wrap gap-2 mb-6">{% for tech in project.get_tech_list %}<span class="px-3 py-1 bg-white/5 rounded-full text-xs text-textMuted border border-white/10">{{ tech }}</span>{% endfor %}</div>
                   <p class="text-textMuted font-light leading-relaxed mb-8">{{ project.description }}</p>
-                  <div class="flex gap-4">
+                  <div class="flex flex-wrap gap-4">
                     {% if project.live_url %}<a href="{{ project.live_url }}" target="_blank" class="btn btn-primary !py-2 !px-6 text-sm magnetic">Live Demo</a>{% endif %}
                     {% if project.github_url %}<a href="{{ project.github_url }}" target="_blank" class="btn btn-ghost !py-2 !px-6 text-sm magnetic"><i data-lucide="github" class="w-4 h-4"></i> GitHub</a>{% endif %}
                   </div>
@@ -277,14 +292,14 @@
             {% endwith %}
           {% else %}
             {% with accent="text-blue-400" grad="from-blue-500/20" %}
-            <article class="project-card glass-card p-8 md:p-12 mb-24 min-h-[60vh] flex flex-col justify-center border-t border-l border-white/10 bg-[#0C0C0C]">
-              <div class="grid md:grid-cols-2 gap-10 items-center">
+            <article class="project-card glass-card p-6 md:p-12 mb-16 md:mb-24 md:min-h-[60vh] flex flex-col justify-center border-t border-l border-white/10 bg-[#0C0C0C]">
+              <div class="grid md:grid-cols-2 gap-6 md:gap-10 items-center">
                 <div>
                   <p class="{{ accent }} font-bold tracking-widest uppercase text-sm mb-4">Project 0{{ forloop.counter }}</p>
                   <h3 class="font-display font-black text-3xl md:text-4xl mb-4">{{ project.title }}</h3>
                   <div class="flex flex-wrap gap-2 mb-6">{% for tech in project.get_tech_list %}<span class="px-3 py-1 bg-white/5 rounded-full text-xs text-textMuted border border-white/10">{{ tech }}</span>{% endfor %}</div>
                   <p class="text-textMuted font-light leading-relaxed mb-8">{{ project.description }}</p>
-                  <div class="flex gap-4">
+                  <div class="flex flex-wrap gap-4">
                     {% if project.live_url %}<a href="{{ project.live_url }}" target="_blank" class="btn btn-primary !py-2 !px-6 text-sm magnetic">Live Demo</a>{% endif %}
                     {% if project.github_url %}<a href="{{ project.github_url }}" target="_blank" class="btn btn-ghost !py-2 !px-6 text-sm magnetic"><i data-lucide="github" class="w-4 h-4"></i> GitHub</a>{% endif %}
                   </div>
@@ -302,9 +317,9 @@
     </div>
   </section>
 
-  <section id="education" class="py-32 relative bg-transparent">
+  <section id="education" class="py-20 md:py-32 relative bg-transparent">
     <div class="max-w-3xl mx-auto px-6">
-      <div class="text-center mb-20 reveal-up">
+      <div class="text-center mb-12 md:mb-20 reveal-up">
         <h2 class="font-display font-black text-4xl md:text-5xl uppercase metal-text mb-4">Education</h2>
         <p class="text-textMuted">The academic foundation.</p>
       </div>
@@ -334,9 +349,9 @@
     </div>
   </section>
 
-  <section id="contact" class="py-32 border-t border-white/5 relative bg-[#0C0C0C]/50 backdrop-blur-md">
+  <section id="contact" class="py-20 md:py-32 border-t border-white/5 relative bg-[#0C0C0C]/50 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="grid lg:grid-cols-2 gap-16">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16">
         <div class="reveal-up">
           <h2 class="font-display font-black text-4xl md:text-6xl uppercase metal-text mb-6 leading-tight">Let's Work<br/>Together</h2>
           <p class="text-textMuted text-lg font-light leading-relaxed mb-10 max-w-md">Looking to start a project or just want to say hi? Let's connect and build something amazing together.</p>
@@ -351,8 +366,8 @@
             <a href="mailto:prajjwaldixit96@gmail.com" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-accentRose transition-all magnetic tilt"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
           </div>
         </div>
-        <form class="glass-card p-8 md:p-10 reveal-up tilt" id="contactForm">
-          <div class="grid grid-cols-2 gap-6 mb-6">
+        <form class="glass-card p-6 md:p-10 reveal-up tilt" id="contactForm">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
             <div><label class="block text-xs font-bold uppercase tracking-widest text-textMuted mb-2">Name</label><input type="text" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accentCyan transition-colors" placeholder="John Doe" name="name" id="fieldName"></div>
             <div><label class="block text-xs font-bold uppercase tracking-widest text-textMuted mb-2">Email</label><input type="email" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accentCyan transition-colors" placeholder="john@example.com" name="email" id="fieldEmail"></div>
           </div>
@@ -367,9 +382,9 @@
     </div>
   </section>
 
-  <footer class="py-20 border-t border-white/10 relative overflow-hidden bg-[#0C0C0C]/80 backdrop-blur-lg">
+  <footer class="py-16 md:py-20 border-t border-white/10 relative overflow-hidden bg-[#0C0C0C]/80 backdrop-blur-lg">
     <div class="max-w-7xl mx-auto px-6 text-center">
-      <h2 class="font-display font-black text-[clamp(2rem,6vw,8rem)] text-white/5 whitespace-nowrap mb-10 select-none">LET'S BUILD SOMETHING AMAZING</h2>
+      <h2 class="font-display font-black text-[clamp(1.75rem,7vw,8rem)] text-white/5 leading-tight whitespace-normal md:whitespace-nowrap mb-10 select-none">LET'S BUILD SOMETHING AMAZING</h2>
       <div class="flex flex-col md:flex-row justify-between items-center gap-6 text-sm font-semibold text-textMuted uppercase tracking-wider">
         <p>Copyright &copy; 2026 Prajjwal</p>
         <div class="flex gap-6">
@@ -389,6 +404,34 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       lucide.createIcons();
+
+      // Mobile nav toggle
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const menuIconOpen = document.getElementById('menuIconOpen');
+      const menuIconClose = document.getElementById('menuIconClose');
+      function closeMobileMenu() {
+        mobileMenu?.classList.add('hidden');
+        menuIconOpen?.classList.remove('hidden');
+        menuIconClose?.classList.add('hidden');
+        mobileMenuBtn?.setAttribute('aria-expanded', 'false');
+      }
+      if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+          const isOpen = !mobileMenu.classList.contains('hidden');
+          if (isOpen) {
+            closeMobileMenu();
+          } else {
+            mobileMenu.classList.remove('hidden');
+            menuIconOpen.classList.add('hidden');
+            menuIconClose.classList.remove('hidden');
+            mobileMenuBtn.setAttribute('aria-expanded', 'true');
+          }
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMobileMenu));
+      }
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
       lenis.on('scroll', ScrollTrigger.update);
       gsap.ticker.add((time) => lenis.raf(time * 1000));
@@ -457,18 +500,19 @@
         }
       });
 
-      initThreeJS();
+      if (!prefersReducedMotion) initThreeJS();
     });
     function initThreeJS() {
       const canvas = document.getElementById('bg-canvas');
       if (!canvas || !window.THREE) return;
+      const isMobile = window.innerWidth < 768;
       const scene = new THREE.Scene();
       scene.fog = new THREE.FogExp2(0x0C0C0C, 0.02);
       const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
       camera.position.z = 15;
-      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: !isMobile });
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
       const parallaxGroup = new THREE.Group(); scene.add(parallaxGroup);
       const scrollGroup = new THREE.Group(); parallaxGroup.add(scrollGroup);
       const wireMat = new THREE.MeshBasicMaterial({ color: 0xA855F7, wireframe: true, transparent: true, opacity: 0.25 });
@@ -480,14 +524,16 @@
       addShape(new THREE.IcosahedronGeometry(4,1), wireMat, 0,0,0, 0.002,0.003);
       addShape(new THREE.TorusGeometry(3,0.8,16,100), solidMat, -6,3,-5, 0.005,0.002);
       addShape(new THREE.OctahedronGeometry(2,0), glowMat, 7,-4,-3, -0.004,0.005);
-      for(let i=0;i<70;i++) {
+      const extraShapeCount = isMobile ? 20 : 70;
+      for(let i=0;i<extraShapeCount;i++) {
         const t = Math.floor(Math.random()*5);
         let geo = t===0 ? new THREE.TorusKnotGeometry(1.5,0.4,64,8) : t===1 ? new THREE.IcosahedronGeometry(Math.random()*2+1,0) : t===2 ? new THREE.BoxGeometry(2,2,2) : t===3 ? new THREE.ConeGeometry(1.5,3,4) : new THREE.TetrahedronGeometry(2,0);
         const mr = Math.random(); let mat = mr>0.6 ? solidMat : mr>0.3 ? accentMat : wireMat;
         addShape(geo, mat, (Math.random()-0.5)*50, -Math.random()*350-10, (Math.random()-0.5)*35-10, (Math.random()-0.5)*0.01, (Math.random()-0.5)*0.01);
       }
-      const pg = new THREE.BufferGeometry(); const pa = new Float32Array(3000*3);
-      for(let i=0;i<3000*3;i++) { pa[i]=(Math.random()-0.5)*(i%3===1?420:60)-(i%3===1?190:0); }
+      const particleCount = isMobile ? 900 : 3000;
+      const pg = new THREE.BufferGeometry(); const pa = new Float32Array(particleCount*3);
+      for(let i=0;i<particleCount*3;i++) { pa[i]=(Math.random()-0.5)*(i%3===1?420:60)-(i%3===1?190:0); }
       pg.setAttribute('position', new THREE.BufferAttribute(pa,3));
       const pm = new THREE.Points(pg, new THREE.PointsMaterial({size:0.05,color:0xC084FC,transparent:true,opacity:0.6}));
       scrollGroup.add(pm);
